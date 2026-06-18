@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>AI Resume Analyzer</title>
+
+```
+<link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+```
+
+</head>
+
+<body>
+
+```
+<div class="container">
+
+    <h1>🚀 AI Resume Analyzer</h1>
+
+    <p class="subtitle">
+        Upload your Resume and get ATS Score,
+        Domain Analysis and Career Suggestions
+    </p>
+
+    <form action="/analyze"
+        method="POST"
+        enctype="multipart/form-data">
+
+        <input
+            type="file"
+            name="resume"
+            required>
+
+        <br><br>
+
+        <button type="submit">
+            Analyze Resume
+        </button>
+
+    </form>
+
+    {% if score is defined %}
+
+    <hr>
+
+    <div class="card">
+
+        <h2>🎯 Best Domain</h2>
+
+        <h3>{{ domain }}</h3>
+
+    </div>
+
+    <div class="card">
+
+        <h2>📊 ATS Score</h2>
+
+        <h1>{{ score }}%</h1>
+
+        <div class="progress">
+
+            <div class="progress-fill"
+                style="width:{{ score }}%">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>📈 Resume Analysis Chart</h2>
+
+        <img
+            src="{{ url_for('static', filename='chart.png') }}"
+            width="300">
+
+    </div>
+
+    <div class="card">
+
+        <h2>✅ Skills Found</h2>
+
+        <ul>
+
+            {% for skill in found %}
+
+            <li>{{ skill }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <div class="card">
+
+        <h2>❌ Missing Skills</h2>
+
+        <ul>
+
+            {% for skill in missing %}
+
+            <li>{{ skill }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <div class="card">
+
+        <h2>💼 Recommended Job Roles</h2>
+
+        <ul>
+
+            {% for role in roles %}
+
+            <li>{{ role }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <div class="card">
+
+        <h2>⭐ Suggestions</h2>
+
+        <ul>
+
+            {% for s in suggestions %}
+
+            <li>{{ s }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <br>
+
+    <a href="/download-report">
+
+        <button>
+            📄 Download PDF Report
+        </button>
+
+    </a>
+
+    {% endif %}
+
+</div>
+```
+
+</body>
+
+</html>
